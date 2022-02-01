@@ -5,87 +5,53 @@
 </script>
 
 <template>
-<div class="">
-	<div
-		v-for="question in questions"
-		v-bind:key="question.label"
-	>
-		<div
-			v-if="question.show"
-			class="border-2 border-blue-400 mb-10"
-		>
-			<p>{{ question.question }}</p>
-			<input
-				v-if="question.type === 'input'"
-				v-model="question.answer" type="text"
-				class="border-2 border-green-300"
-			>
-			<div v-if="question.type === 'single' && question.answers.length > 0">
-				<button
-					v-for="answer in question.answers"
-					v-bind:key="answer.id"
-					v-on:click="handleSingleCheck(question, answer)"
-					name="question.name"
-					class="border-2 border-red-100 px-10 py-1"
-					v-bind:class="{
-						'border-red-900': question.answer === answer.text,
-					}"
-				>
-					{{ answer.text }}
-				</button>
-			</div>
-			<div v-if="question.type === 'multiple' && question.answers.length > 0">
-				<button
-					v-for="answer in question.answers"
-					v-bind:key="answer.id"
-					v-on:click="handleMultipleCheck(question, answer)"
-					name="question.name"
-					class="border-2 border-red-100 px-10 py-1"
-					v-bind:class="{
-						'border-red-900': answer.isChecked,
-					}"
-				>
-					{{ answer.text }}
-				</button>
-			</div>
-			<button
-				v-on:click="handleButtonNext(question)"
-			>
-				Далее
-			</button>
+<div class="flex justify-around pt-5">
+	<div class="bg-gray-100 rounded-lg p-10 flex justify-around">
+		<div class="">
+			<question-card
+				v-for="question in questions"
+				:key="question.label"
+				:question="question"
+				:admin="admin"
+				@remove-question="removeQuestion(question)"
+				@button-next="handleButtonNext(question)"
+			/>
 		</div>
+		<answers-table :questions="questions" />
 	</div>
-	<form
-			v-if="true || questions[0].answer"
-	>
-		<h2>Ответы</h2>
-		<div
-			v-for="question in questions"
-			v-bind:key="question.label"
-		>
-			<div
-				v-if="question.answer"
-			>
-				{{ question.question }} — {{ question.answer }}
-			</div>
-		</div>
-	</form>
+
+	<admin-editor :admin="admin" />
 </div>
 </template>
 
 <script>
+
+// import Question from './classes/Question';
+import InputQuestion from './classes/InputQuestion';
+import QuestionCard from './components/QuestionCard.vue';
+import AdminEditor from './components/AdminEditor.vue';
+import AnswersTable from './components/AnswersTable.vue';
+
 export default {
 	name: "App",
 	data() {
 		return {
 			appName: 'quizly',
+			admin: {
+				show: true,
+				showAll: true,
+				currentQuestion: {
+					type: 'input',
+					question: '',
+				}
+			},
 			questions: [
 				{
 					"id": 1,
-					"label": 'age',
+					"label": 'food',
 					"type": "multiple",
 					"question": "Что выберешь?",
-					"answer": null,
+					"answer": [],
 					"show": true,
 					"answers": [
 						{
@@ -99,7 +65,7 @@ export default {
 							"isChecked": false,
 						},
 						{
-							"id": 2,
+							"id": 3,
 							"text": "Пивас",
 							"isChecked": false,
 						},
@@ -119,7 +85,7 @@ export default {
 					"label": 'sex',
 					"type": "single",
 					"question": "Пол",
-					"answer": null,
+					"answer": '',
 					"answers": [
 						{
 							"id": 1,
@@ -143,9 +109,9 @@ export default {
 		}
 	},
 	methods: {
-		handleSingleCheck(currentQuestion, currentAnswer) {
-			currentQuestion.answer = currentAnswer.text;
-		},
+		// handleSingleCheck(currentQuestion, currentAnswer) {
+			// currentQuestion.answer = currentAnswer.text;
+		// },
 		handleMultipleCheck(currentQuestion, currentAnswer) {
 			currentAnswer.isChecked = !currentAnswer.isChecked;
 			if (currentQuestion.answer === null) currentQuestion.answer = ''
@@ -175,6 +141,10 @@ export default {
 			let currentQuestionIndex = this.questions.indexOf(currentQuestion);
 			this.questions[currentQuestionIndex + 1].show = true;
 		},
-	}
+		removeQuestion(currentQuestion) {
+			this.questions = this.questions.filter((question) => question != currentQuestion)
+			console.log(this.questions)
+		},
+	},
 }
 </script>
