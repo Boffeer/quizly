@@ -21,19 +21,34 @@
 	</div>
 
 	<admin-editor :admin="admin" />
+	<modal-window v-if="modal.opened" @toggle-modal="handleModal(modal)">
+		<template #modal>
+			<modal-danger />
+		</template>
+	</modal-window>
+	<button @click="handleModal(modal)">Модалка</button>
 </div>
 </template>
 
 <script>
 
-// import Question from './classes/Question';
-import InputQuestion from './classes/InputQuestion';
-import QuestionCard from './components/QuestionCard.vue';
+import QuestionCard from './components/Question/QuestionCard.vue';
 import AdminEditor from './components/AdminEditor.vue';
 import AnswersTable from './components/AnswersTable.vue';
+import ModalWindow from './components/modals/ModalWindow.vue';
+import ModalDanger from './components/modals/ModalDanger.vue';
+import ModalSuccess from './components/modals/ModalSuccess.vue';
 
 export default {
 	name: "App",
+	components: {
+		QuestionCard,
+		AdminEditor,
+		AnswersTable,
+		ModalWindow,
+		ModalDanger,
+		ModalSuccess,
+	},
 	data() {
 		return {
 			appName: 'quizly',
@@ -48,9 +63,9 @@ export default {
 			questions: [
 				{
 					"id": 1,
-					"label": 'food',
-					"type": "multiple",
-					"question": "Что выберешь?",
+					"label": 'coins',
+					"type": "stepper",
+					"question": "Сколько монет",
 					"answer": [],
 					"show": true,
 					"answers": [
@@ -73,6 +88,31 @@ export default {
 				},
 				{
 					"id": 2,
+					"label": 'food',
+					"type": "multiple",
+					"question": "Что выберешь?",
+					"answer": [],
+					"show": false,
+					"answers": [
+						{
+							"id": 1,
+							"text": "Драники",
+							"isChecked": false,
+						},
+						{
+							"id": 2,
+							"text": "Мочанка",
+							"isChecked": false,
+						},
+						{
+							"id": 3,
+							"text": "Пивас",
+							"isChecked": false,
+						},
+					]
+				},
+				{
+					"id": 3,
 					"show": false,
 					"label": 'name',
 					"type": "input",
@@ -80,7 +120,7 @@ export default {
 					"answer": null,
 				},
 				{
-					"id": 3,
+					"id": 4,
 					"show": false,
 					"label": 'sex',
 					"type": "single",
@@ -98,7 +138,7 @@ export default {
 					]
 				},
 				{
-					"id": 4,
+					"id": 5,
 					"label": 'age',
 					"type": "input",
 					"question": "Сколько тебе лет?",
@@ -106,6 +146,9 @@ export default {
 					"show": false,
 				},
 			],
+			modal: {
+				opened: false,
+			},
 		}
 	},
 	methods: {
@@ -145,6 +188,9 @@ export default {
 			this.questions = this.questions.filter((question) => question != currentQuestion)
 			console.log(this.questions)
 		},
+		handleModal(modal) {
+			modal.opened = !modal.opened;
+		}
 	},
 }
 </script>

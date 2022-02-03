@@ -3,7 +3,6 @@
 		<input type="checkbox" v-model="admin.show"> Admin is {{ admin.show }}
 	</label>
 	<div v-if="admin.show" class="admin">
-		<div>
 			<div>
 				<label>
 					<input type="checkbox" v-model="admin.showAll"> show all questions
@@ -20,15 +19,20 @@
 					Single
 				</label>
 				<label>
-				<input type="radio" name="questionType" value="multiple" v-model="admin.currentQuestion.type">
+					<input type="radio" name="questionType" value="multiple" v-model="admin.currentQuestion.type">
 					Multiple
 				</label>
 			<!-- <button v-on:click="createQuestion('text')">Text</button>
 			<button>Single</button>
 			<button>Multiple</button> -->
 			</div>
-			<button v-on:click="createQuestion" class="bg-orange-200 text-orange-900 rounded p-2 text-bold">Create question</button>
-		</div>
+
+			<button
+				v-on:click="createQuestion"
+				class="bg-orange-200 text-orange-900 rounded p-2 text-bold"
+			>
+				Create question
+			</button>
 	</div>
 </template>
 <script>
@@ -40,7 +44,12 @@ export default {
 	},
 	data() {
 		return {
-
+			questionTypes: [
+				{
+					id: 0,
+					label: ''
+				}
+			]
 		}
 	},
 }
