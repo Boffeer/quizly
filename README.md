@@ -14,9 +14,9 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [x] input
 - [x] radio
 - [x] checkbox
-- [ ] textarea
+- [x] textarea
 - [ ] calendar
-- [ ] stepper
+- [x] stepper
 Сделай эту штуку на слотах
 
 ### Creator
