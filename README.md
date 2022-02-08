@@ -40,3 +40,8 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 ## Modals
 
 - [ ] Make modal with teleport
+
+---
+
+- [ ] Переделай степпер в инстанс инпута
+- [ ] Подавь Multiple ограничение на количество выбранных вариантов

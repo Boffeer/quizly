@@ -6,9 +6,13 @@
 <template>
   <div class="flex justify-around pt-5">
     <div class="bg-gray-100 rounded-lg p-10 flex justify-around">
-      <question-list />
+      <question-list
+        :questions="questions"
+        :admin="admin"
+        @remove-question="removeQuestion"
+      />
     </div>
-    <admin-editor :admin="admin" />
+    <admin-editor :admin="admin" @create-question="addQuestion" />
   </div>
 </template>
 
@@ -25,16 +29,108 @@ export default {
   data() {
     return {
       appName: 'quizly',
+      questions: [],
+      questionss: [
+        {
+          id: 1,
+          label: 'coins',
+          type: 'textarea',
+          question: 'Сколько монет',
+          answer: [],
+          show: true,
+          answers: [
+            {
+              id: 1,
+              text: 'Драники',
+              isChecked: false,
+            },
+            {
+              id: 2,
+              text: 'Мочанка',
+              isChecked: false,
+            },
+            {
+              id: 3,
+              text: 'Пивас',
+              isChecked: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          label: 'food',
+          type: 'multiple',
+          question: 'Что выберешь?',
+          answer: [],
+          show: false,
+          answers: [
+            {
+              id: 1,
+              text: 'Драники',
+              isChecked: false,
+            },
+            {
+              id: 2,
+              text: 'Мочанка',
+              isChecked: false,
+            },
+            {
+              id: 3,
+              text: 'Пивас',
+              isChecked: false,
+            },
+          ],
+        },
+        {
+          id: 3,
+          show: false,
+          label: 'name',
+          type: 'input',
+          question: 'Как тебя зовут?',
+          answer: null,
+        },
+        {
+          id: 4,
+          show: false,
+          label: 'sex',
+          type: 'single',
+          question: 'Пол',
+          answer: '',
+          answers: [
+            {
+              id: 1,
+              text: 'М',
+            },
+            {
+              id: 2,
+              text: 'Ж',
+            },
+          ],
+        },
+        {
+          id: 5,
+          label: 'age',
+          type: 'input',
+          question: 'Сколько тебе лет?',
+          answer: null,
+          show: false,
+        },
+      ],
       admin: {
         show: true,
         showAll: true,
         currentQuestion: {
           type: 'input',
           question: '',
+          answer: '',
+          answers: [],
         },
-      },
-      modal: {
-        opened: false,
+        questionTypes: [
+          {
+            id: 0,
+            label: '',
+          },
+        ],
       },
     };
   },
@@ -74,6 +170,21 @@ export default {
     },
     handleModal(modal) {
       modal.opened = !modal.opened;
+    },
+    addQuestion(e) {
+      this.questions.push({
+        id: this.questions.length,
+        label: null,
+        type: e.type,
+        question: e.question,
+        answer: [],
+        show: true,
+        answers: e.answers,
+      });
+    },
+    removeQuestion(e) {
+      console.log(e);
+      this.questions = e;
     },
   },
 };

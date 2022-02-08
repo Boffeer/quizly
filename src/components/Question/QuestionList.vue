@@ -1,16 +1,15 @@
 <template>
   <div class="">
     <question-card
-      v-for="question in questions"
+      v-for="question in questionsLocal"
       :key="question.label"
       :question="question"
-      :admin="admin"
       @remove-question="removeQuestion(question)"
       @button-next="handleButtonNext(question)"
     >
       <template #input> </template>
     </question-card>
-    <answers-table :questions="questions" />
+    <answers-table :questions="questionsLocal" />
   </div>
 </template>
 <script>
@@ -21,106 +20,33 @@ export default {
     QuestionCard,
     AnswersTable,
   },
+  props: {
+    questions: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+  emits: {
+    'remove-question': null,
+  },
   data() {
     return {
-      questions: [
-        {
-          id: 1,
-          label: 'coins',
-          type: 'textarea',
-          question: 'Сколько монет',
-          answer: [],
-          show: true,
-          answers: [
-            {
-              id: 1,
-              text: 'Драники',
-              isChecked: false,
-            },
-            {
-              id: 2,
-              text: 'Мочанка',
-              isChecked: false,
-            },
-            {
-              id: 3,
-              text: 'Пивас',
-              isChecked: false,
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: 'food',
-          type: 'multiple',
-          question: 'Что выберешь?',
-          answer: [],
-          show: false,
-          answers: [
-            {
-              id: 1,
-              text: 'Драники',
-              isChecked: false,
-            },
-            {
-              id: 2,
-              text: 'Мочанка',
-              isChecked: false,
-            },
-            {
-              id: 3,
-              text: 'Пивас',
-              isChecked: false,
-            },
-          ],
-        },
-        {
-          id: 3,
-          show: false,
-          label: 'name',
-          type: 'input',
-          question: 'Как тебя зовут?',
-          answer: null,
-        },
-        {
-          id: 4,
-          show: false,
-          label: 'sex',
-          type: 'single',
-          question: 'Пол',
-          answer: '',
-          answers: [
-            {
-              id: 1,
-              text: 'М',
-            },
-            {
-              id: 2,
-              text: 'Ж',
-            },
-          ],
-        },
-        {
-          id: 5,
-          label: 'age',
-          type: 'input',
-          question: 'Сколько тебе лет?',
-          answer: null,
-          show: false,
-        },
-      ],
+      questionsLocal: this.questions,
     };
   },
   methods: {
     handleButtonNext(currentQuestion) {
       let currentQuestionIndex = this.questions.indexOf(currentQuestion);
-      this.questions[currentQuestionIndex + 1].show = true;
+      this.questionsLocal[currentQuestionIndex + 1].show = true;
     },
     removeQuestion(currentQuestion) {
-      this.questions = this.questions.filter(
+      this.questionsLocal = this.questions.filter(
         (question) => question != currentQuestion
       );
-      console.log(this.questions);
+
+      this.$emit('remove-question', this.questionsLocal);
     },
   },
 };
