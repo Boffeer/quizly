@@ -1,11 +1,12 @@
 <template>
   <div
-    v-if="question.show || admin.showAll"
+    v-if="questionLocal.show || admin.showAll"
     class="mr-2 border-2 mb-10 bg-white rounded-md p-2"
   >
     <button v-if="admin.show" @click="removeQuestion()">remove</button>
-    <p>{{ question.question }}</p>
-    <question-input :question="question" />
+    <p>{{ questionLocal.question }}</p>
+    <question-input :question="questionLocal" />
+    <slot name="input"></slot>
     <question-textarea :question="question" />
     <question-stepper :question="question" />
     <question-single :question="question" />
@@ -23,22 +24,39 @@ import QuestionStepper from './QuestionStepper.vue';
 
 export default {
   components: {
+    QuestionInput,
     QuestionMultiple,
     QuestionSingle,
     QuestionStepper,
-    QuestionInput,
     QuestionTextarea,
   },
   props: {
-    question: Object,
-    admin: Object,
+    question: {
+      type: Object,
+      default() {
+        return {
+          show: 'false',
+        };
+      },
+    },
+    admin: {
+      type: Object,
+      default() {
+        return {
+          show: true,
+          showAll: true,
+        };
+      },
+    },
   },
   emits: {
     'button-next': null,
     'remove-question': null,
   },
   data() {
-    return {};
+    return {
+      questionLocal: this.question,
+    };
   },
   methods: {
     handleButtonNext() {

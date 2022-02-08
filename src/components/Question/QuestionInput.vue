@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div v-if="questionLocal.type === 'input'">
     <input
-      v-if="question.type === 'input'"
-      v-model="question.answer"
+      v-model="questionLocal.answer"
       type="text"
       class="border-2 border-green-300"
     />
@@ -11,10 +10,20 @@
 <script>
 export default {
   props: {
-    question: { type: Object, required: true },
+    question: {
+      type: Object,
+      default() {
+        return {
+          type: 'input',
+          answer: 'answer',
+        };
+      },
+    },
   },
   data() {
-    return {};
+    return {
+      questionLocal: this.question,
+    };
   },
 };
 </script>

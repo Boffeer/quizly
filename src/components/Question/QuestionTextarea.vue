@@ -1,8 +1,8 @@
 <template>
   <div>
     <textarea
-      v-if="question.type === 'textarea'"
-      v-model="question.answer"
+      v-if="questionLocal.type === 'textarea'"
+      v-model="questionLocal.answer"
       type="text"
       class="border-2 border-green-300"
       wrap="hard"
@@ -17,7 +17,9 @@ export default {
     question: { type: Object, required: true },
   },
   data() {
-    return {};
+    return {
+      questionLocal: this.question,
+    };
   },
 };
 </script>

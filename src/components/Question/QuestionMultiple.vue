@@ -1,17 +1,19 @@
 <template>
-  <template v-if="question.type === 'multiple' && question.answers.length > 0">
+  <template
+    v-if="questionLocal.type === 'multiple' && questionLocal.answers.length > 0"
+  >
     <label
-      v-for="answer in question.answers"
-      :key="answer.id"
+      v-for="(answer, index) in questionLocal.answers"
+      :key="index"
       class="border-2 border-red-100 px-10 py-1"
       :class="{
-        'border-red-900': question.answer.includes(answer.text),
+        'border-red-900': questionLocal.answer.includes(answer.text),
       }"
     >
       <input
+        v-model="questionLocal.answer"
         type="checkbox"
-        :name="question.name"
-        v-model="question.answer"
+        :name="questionLocal.name"
         :value="answer.text"
       />
       {{ answer.text }}
@@ -24,7 +26,9 @@ export default {
     question: { type: Object, required: true },
   },
   data() {
-    return {};
+    return {
+      questionLocal: this.question,
+    };
   },
 };
 </script>

@@ -6,7 +6,6 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
-
 ## Features
 
 ### Question cards
@@ -17,13 +16,12 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [x] textarea
 - [ ] calendar
 - [x] stepper
-Сделай эту штуку на слотах
+      Сделай эту штуку на слотах
 
 ### Creator
 
 - [ ] Create questions linear sequence
 - [ ] Non-linear questions sequens
-
 
 ## Admin
 
@@ -34,8 +32,11 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 - [ ] Будет запись в локалстораж, а потом декомпознется и выведет вопросики
 
-
 Сделай модалку на слотах, чтобы туда можно было пихать разный конент. Чтоб это была модалка с конфёрмом инпутом, просто модалка и чтоб умела передавать события наверх, чтобы апи мог понимать, что модалка закрылась
 
 - [ ] Прочекай все описания и первые коменты под туторами, чтобы найти нужные разделы документации
 - [ ] Почитай доку по $options
+
+## Modals
+
+- [ ] Make modal with teleport

@@ -6,44 +6,21 @@
 <template>
   <div class="flex justify-around pt-5">
     <div class="bg-gray-100 rounded-lg p-10 flex justify-around">
-      <div class="">
-        <question-card
-          v-for="question in questions"
-          :key="question.label"
-          :question="question"
-          :admin="admin"
-          @remove-question="removeQuestion(question)"
-          @button-next="handleButtonNext(question)"
-        />
-      </div>
-      <answers-table :questions="questions" />
+      <question-list />
     </div>
-
     <admin-editor :admin="admin" />
-    <modal-window v-if="modal.opened" @toggle-modal="handleModal(modal)">
-      <template #modal>
-        <modal-danger />
-      </template>
-    </modal-window>
-    <button @click="handleModal(modal)">Модалка</button>
   </div>
 </template>
 
 <script>
-import QuestionCard from './components/Question/QuestionCard.vue';
+import QuestionList from './components/Question/QuestionList.vue';
 import AdminEditor from './components/AdminEditor.vue';
-import AnswersTable from './components/AnswersTable.vue';
-import ModalWindow from './components/modals/ModalWindow.vue';
-import ModalDanger from './components/modals/ModalDanger.vue';
 
 export default {
   name: 'App',
   components: {
-    QuestionCard,
+    QuestionList,
     AdminEditor,
-    AnswersTable,
-    ModalWindow,
-    ModalDanger,
   },
   data() {
     return {
@@ -56,92 +33,6 @@ export default {
           question: '',
         },
       },
-      questions: [
-        {
-          id: 1,
-          label: 'coins',
-          type: 'textarea',
-          question: 'Сколько монет',
-          answer: [],
-          show: true,
-          answers: [
-            {
-              id: 1,
-              text: 'Драники',
-              isChecked: false,
-            },
-            {
-              id: 2,
-              text: 'Мочанка',
-              isChecked: false,
-            },
-            {
-              id: 3,
-              text: 'Пивас',
-              isChecked: false,
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: 'food',
-          type: 'multiple',
-          question: 'Что выберешь?',
-          answer: [],
-          show: false,
-          answers: [
-            {
-              id: 1,
-              text: 'Драники',
-              isChecked: false,
-            },
-            {
-              id: 2,
-              text: 'Мочанка',
-              isChecked: false,
-            },
-            {
-              id: 3,
-              text: 'Пивас',
-              isChecked: false,
-            },
-          ],
-        },
-        {
-          id: 3,
-          show: false,
-          label: 'name',
-          type: 'input',
-          question: 'Как тебя зовут?',
-          answer: null,
-        },
-        {
-          id: 4,
-          show: false,
-          label: 'sex',
-          type: 'single',
-          question: 'Пол',
-          answer: '',
-          answers: [
-            {
-              id: 1,
-              text: 'М',
-            },
-            {
-              id: 2,
-              text: 'Ж',
-            },
-          ],
-        },
-        {
-          id: 5,
-          label: 'age',
-          type: 'input',
-          question: 'Сколько тебе лет?',
-          answer: null,
-          show: false,
-        },
-      ],
       modal: {
         opened: false,
       },
@@ -180,16 +71,6 @@ export default {
       }
       if (currentAnswer.isChecked)
         currentQuestion.answer.push(currentAnswer.text);
-    },
-    handleButtonNext(currentQuestion) {
-      let currentQuestionIndex = this.questions.indexOf(currentQuestion);
-      this.questions[currentQuestionIndex + 1].show = true;
-    },
-    removeQuestion(currentQuestion) {
-      this.questions = this.questions.filter(
-        (question) => question != currentQuestion
-      );
-      console.log(this.questions);
     },
     handleModal(modal) {
       modal.opened = !modal.opened;

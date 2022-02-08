@@ -4,11 +4,11 @@
     @click="handleModal"
   >
     <div class="popup__aligner flex items-center justify-center w-full h-full">
-      <div @click.stop class="popup bg-white rounded-lg p-4">
-        <slot name="modal" :modal="modal"></slot>
+      <div class="popup bg-white rounded-lg p-4" @click.stop>
+        <slot name="message" :message="message"></slot>
         <button
-          @click="handleModal"
           class="popup__button rounded-md bg-blue-200 text-blue-500 py-1 px-5"
+          @click="handleModal"
         >
           ОК
         </button>
