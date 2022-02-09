@@ -18,6 +18,8 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [x] stepper
       Сделай эту штуку на слотах
 
+- [ ] remove foldres
+
 ### Creator
 
 - [ ] Create questions linear sequence
@@ -30,11 +32,7 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 ## Gallery
 
-- [ ] Будет запись в локалстораж, а потом декомпознется и выведет вопросики
-
-Сделай модалку на слотах, чтобы туда можно было пихать разный конент. Чтоб это была модалка с конфёрмом инпутом, просто модалка и чтоб умела передавать события наверх, чтобы апи мог понимать, что модалка закрылась
-
-- [ ] Прочекай все описания и первые коменты под туторами, чтобы найти нужные разделы документации
+- [ ] Прочекай все описания и первые коменты под туторами Климова, чтобы найти нужные разделы документации
 - [ ] Почитай доку по $options
 
 ## Modals
@@ -45,3 +43,13 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 - [ ] Переделай степпер в инстанс инпута
 - [ ] Подавь Multiple ограничение на количество выбранных вариантов
+
+## DB
+
+- [ ] Make admin quiz saver with set `answer` to []
+- [ ] Make new structure to questions:
+      currentQuiz
+  - name
+  - id
+  - questions
+    quizesGallery
