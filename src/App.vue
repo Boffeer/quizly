@@ -5,6 +5,13 @@
 </script>-->
 <template>
   <div class="flex justify-around pt-5">
+    <div class="last-quizes">
+      <div v-for="(quiz, index) in quizes" :key="index">
+        <button @click="useQuiz(quiz)">
+          Квиз из {{ quiz.questions.length }} вопросов
+        </button>
+      </div>
+    </div>
     <div class="bg-gray-100 rounded-lg p-10 flex justify-around">
       <question-list
         :questions="questions"
@@ -14,11 +21,20 @@
     </div>
     <admin-editor :admin="admin" @create-question="addQuestion" />
   </div>
+  <button class="mr-2 bg-green-300 text-green-700" @click="saveQuiz">
+    Save Quiz
+  </button>
+  <button class="mr-2 bg-orange-300 text-orange-700" @click="getQuizes">
+    Get Quizes
+  </button>
 </template>
 
 <script>
 import QuestionList from './components/Question/QuestionList.vue';
 import AdminEditor from './components/AdminEditor.vue';
+
+import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 export default {
   name: 'App',
@@ -30,6 +46,8 @@ export default {
     return {
       appName: 'quizly',
       questions: [],
+      db: getFirestore(),
+      quizes: [],
       questionss: [
         {
           id: 1,
@@ -185,6 +203,34 @@ export default {
     removeQuestion(e) {
       console.log(e);
       this.questions = e;
+    },
+    async saveQuiz() {
+      try {
+        const docRef = await addDoc(collection(this.db, 'quizes'), {
+          id: 1,
+          questions: this.questions,
+        });
+
+        console.log('Document written with ID: ', docRef.id);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
+    },
+    async getQuizes() {
+      const querySnapshot = await getDocs(collection(this.db, 'quizes'));
+      let read = {};
+      querySnapshot.forEach((doc) => {
+        read[doc.id] = doc.data();
+      });
+      // console.log(read);
+      this.quizes = read;
+    },
+    useQuiz(quiz) {
+      this.questions = [];
+      this.$nextTick(() => {
+        const normalizedQuiz = JSON.parse(JSON.stringify(quiz));
+        this.questions = normalizedQuiz.questions;
+      });
     },
   },
 };

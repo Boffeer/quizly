@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <question-card
-      v-for="question in questionsLocal"
+      v-for="question in questions"
       :key="question.label"
       :question="question"
       @remove-question="removeQuestion(question)"
@@ -9,7 +9,7 @@
     >
       <template #input> </template>
     </question-card>
-    <answers-table :questions="questionsLocal" />
+    <answers-table :questions="questions" />
   </div>
 </template>
 <script>
