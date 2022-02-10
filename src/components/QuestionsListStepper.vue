@@ -2,8 +2,8 @@
   <div v-if="questionLocal.type === 'stepper'">
     <button class="bg-red-200 text-red-800" @click="decrement">−</button>
     <input
+      v-model.number="questionLocal.answer"
       class="border-2"
-      v-model="questionLocal.answer"
       type="text"
       inputmode="numeric"
       @keyup="handleKeyup(question.answer)"

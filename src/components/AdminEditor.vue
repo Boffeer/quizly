@@ -84,7 +84,13 @@ export default {
   data() {
     return {
       adminLocal: this.admin,
-      allowedQuestionTypes: ['input', 'multiple', 'single', 'textarea'],
+      allowedQuestionTypes: [
+        'input',
+        'multiple',
+        'single',
+        'textarea',
+        'stepper',
+      ],
     };
   },
   methods: {

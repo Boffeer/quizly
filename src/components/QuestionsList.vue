@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <question-card
+    <questions-list-card
       v-for="question in questions"
       :key="question.label"
       :question="question"
@@ -8,16 +8,16 @@
       @button-next="handleButtonNext(question)"
     >
       <template #input> </template>
-    </question-card>
+    </questions-list-card>
     <answers-table :questions="questions" />
   </div>
 </template>
 <script>
-import QuestionCard from './QuestionCard.vue';
-import AnswersTable from '../AnswersTable.vue';
+import QuestionsListCard from './QuestionsListCard.vue';
+import AnswersTable from './AnswersTable.vue';
 export default {
   components: {
-    QuestionCard,
+    QuestionsListCard,
     AnswersTable,
   },
   props: {

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import QuestionList from './components/Question/QuestionList.vue';
+import QuestionList from './components/QuestionsList.vue';
 import AdminEditor from './components/AdminEditor.vue';
 
 import { collection, addDoc, getDocs } from 'firebase/firestore';

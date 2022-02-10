@@ -5,30 +5,30 @@
   >
     <button v-if="admin.show" @click="removeQuestion()">remove</button>
     <p>{{ questionLocal.question }}</p>
-    <question-input :question="questionLocal" />
+    <questions-list-input :question="questionLocal" />
     <slot name="input"></slot>
-    <question-textarea :question="question" />
-    <question-stepper :question="question" />
-    <question-single :question="question" />
-    <question-multiple :question="question" />
+    <questions-list-textarea :question="question" />
+    <questions-list-stepper :question="question" />
+    <questions-list-single :question="question" />
+    <questions-list-multiple :question="question" />
     <button @click="handleButtonNext()">Далее</button>
   </div>
 </template>
 
 <script>
-import QuestionInput from './QuestionInput.vue';
-import QuestionTextarea from './QuestionTextarea.vue';
-import QuestionMultiple from './QuestionMultiple.vue';
-import QuestionSingle from './QuestionSingle.vue';
-import QuestionStepper from './QuestionStepper.vue';
+import QuestionsListInput from './QuestionsListInput.vue';
+import QuestionsListTextarea from './QuestionsListTextarea.vue';
+import QuestionsListMultiple from './QuestionsListMultiple.vue';
+import QuestionsListSingle from './QuestionsListSingle.vue';
+import QuestionsListStepper from './QuestionsListStepper.vue';
 
 export default {
   components: {
-    QuestionInput,
-    QuestionMultiple,
-    QuestionSingle,
-    QuestionStepper,
-    QuestionTextarea,
+    QuestionsListInput,
+    QuestionsListMultiple,
+    QuestionsListSingle,
+    QuestionsListStepper,
+    QuestionsListTextarea,
   },
   props: {
     question: {

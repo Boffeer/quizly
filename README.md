@@ -16,19 +16,17 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [x] textarea
 - [ ] calendar
 - [x] stepper
-      Сделай эту штуку на слотах
 
-- [ ] remove foldres
+      Сделай настрорйки:
+      - [ ] Минимум и максиум на пропсах. Минимум по дефолту 0
+      - [ ] Шаг. Отображение шага в плюсиках, тоже пропсы
+
+  Сделай отображение инпута на слотах для каждого типа
 
 ### Creator
 
 - [ ] Create questions linear sequence
 - [ ] Non-linear questions sequens
-
-## Admin
-
-- [ ] Переименуй в Creator
-- [ ] В зависимости от выбранного типа вопроса будут появлться нужные поля для его заполнения
 
 ## Gallery
 
