@@ -1,10 +1,14 @@
 <template>
   <div class="bg-cyan-900 text-white p-5">
     <label class="mb-2 block">
-      <input v-model="adminLocal.show" type="checkbox" /> Admin is
-      {{ adminLocal.show }}
+      <button
+        class="admin__toggler bg-red-400 text-red-800"
+        @click="toggleAdmin"
+      >
+        Admin is {{ admin.show }}
+      </button>
     </label>
-    <div v-if="adminLocal.show" class="admin">
+    <div v-if="adminLocal.show">
       <input
         v-model="adminLocal.currentQuestion.question"
         type="text"
@@ -23,8 +27,8 @@
       </div>
       <div
         v-if="
-          adminLocal.currentQuestion.type === 'single' ||
-          adminLocal.currentQuestion.type === 'multiple'
+          admin.currentQuestion.type === 'single' ||
+          admin.currentQuestion.type === 'multiple'
         "
         class="mb-2"
       >
@@ -34,7 +38,7 @@
           class="mb-2 border-2 text-black"
         />
         <div
-          v-for="(answer, index) in adminLocal.currentQuestion.answers"
+          v-for="(answer, index) in admin.currentQuestion.answers"
           :key="index"
           class="flex"
         >
@@ -60,11 +64,6 @@
       >
         Create question
       </button>
-      <p>
-        type "{{ adminLocal.currentQuestion.type }}" width text "{{
-          adminLocal.currentQuestion.question
-        }}"
-      </p>
     </div>
   </div>
 </template>
@@ -74,12 +73,15 @@ export default {
     admin: {
       type: Object,
       default() {
-        return;
+        return {
+          show: false,
+        };
       },
     },
   },
   emits: {
     'create-question': null,
+    adminToggle: null,
   },
   data() {
     return {
@@ -117,6 +119,9 @@ export default {
         this.adminLocal.currentQuestion.answers.filter(
           (currentAnswer) => currentAnswer != answer
         );
+    },
+    toggleAdmin() {
+      this.$emit('adminToggle');
     },
   },
 };

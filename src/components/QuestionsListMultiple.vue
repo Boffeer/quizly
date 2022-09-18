@@ -5,7 +5,7 @@
     <label
       v-for="(answer, index) in questionLocal.answers"
       :key="index"
-      class="border-2 border-red-100 px-10 py-1"
+      class="block border-2 border-red-100 px-10 py-1"
       :class="{
         'border-red-900': questionLocal.answer.includes(answer.text),
       }"

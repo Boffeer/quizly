@@ -10,23 +10,23 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 ### Question cards
 
-- [x] input
-- [x] radio
-- [x] checkbox
-- [x] textarea
 - [ ] calendar
-- [x] stepper
 
-      Сделай настрорйки:
-      - [ ] Минимум и максиум на пропсах. Минимум по дефолту 0
-      - [ ] Шаг. Отображение шага в плюсиках, тоже пропсы
+Сделай настрорйки для степпера:
+
+- [ ] Минимум и максиум на пропсах. Минимум по дефолту 0
+- [ ] Шаг. Отображение шага в плюсиках, тоже пропсы
+
+- [ ] Подавь Multiple ограничение на количество выбранных вариантов
 
   Сделай отображение инпута на слотах для каждого типа
 
 ### Creator
 
 - [ ] Create questions linear sequence
-- [ ] Non-linear questions sequens
+- [ ] Non-linear questions sequens. Using field `condition` with my syntax
+      @ — answer
+      while you create question, interface will highlight by border-color questions
 
 ## Gallery
 
@@ -39,9 +39,6 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 ---
 
-- [ ] Переделай степпер в инстанс инпута
-- [ ] Подавь Multiple ограничение на количество выбранных вариантов
-
 ## DB
 
 - [ ] Make admin quiz saver with set `answer` to []
@@ -51,3 +48,7 @@ This template should help get you started developing with Vue 3 in Vite. The tem
   - id
   - questions
     quizesGallery
+
+## Ideal interface
+
+[flowchart with svg](https://resources.jointjs.com/demos/chatbot)

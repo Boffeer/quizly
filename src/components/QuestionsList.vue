@@ -30,6 +30,7 @@ export default {
   },
   emits: {
     'remove-question': null,
+    'next-question': null,
   },
   data() {
     return {
@@ -38,8 +39,9 @@ export default {
   },
   methods: {
     handleButtonNext(currentQuestion) {
-      let currentQuestionIndex = this.questions.indexOf(currentQuestion);
-      this.questionsLocal[currentQuestionIndex + 1].show = true;
+      // let currentQuestionIndex = this.questions.indexOf(currentQuestion);
+      // this.questionsLocal[currentQuestionIndex + 1].show = false;
+      this.$emit('next-question', currentQuestion);
     },
     removeQuestion(currentQuestion) {
       this.questionsLocal = this.questions.filter(

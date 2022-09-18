@@ -1,17 +1,17 @@
 <template>
   <div
-    v-if="questionLocal.show || admin.showAll"
+    v-if="questionLocal.show || admin.show"
     class="mr-2 border-2 mb-10 bg-white rounded-md p-2"
   >
     <button v-if="admin.show" @click="removeQuestion()">remove</button>
-    <p>{{ questionLocal.question }}</p>
-    <questions-list-input :question="questionLocal" />
+    <p>{{ question.question }}</p>
+    <questions-list-input :question="question" />
     <slot name="input"></slot>
     <questions-list-textarea :question="question" />
     <questions-list-stepper :question="question" />
     <questions-list-single :question="question" />
     <questions-list-multiple :question="question" />
-    <button @click="handleButtonNext()">Далее</button>
+    <button @click="handleButtonNext($question)">Далее</button>
   </div>
 </template>
 
@@ -59,8 +59,8 @@ export default {
     };
   },
   methods: {
-    handleButtonNext() {
-      this.$emit('button-next');
+    handleButtonNext(question) {
+      this.$emit('button-next', question);
     },
     removeQuestion() {
       this.$emit('remove-question');
